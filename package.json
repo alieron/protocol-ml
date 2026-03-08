@@ -1,0 +1,15 @@
+{
+  "name": "protocol-ml",
+  "version": "0.1.0",
+  "description": "Protocol diagram markup language renderer",
+  "module": "dist/protocol-ml.esm.m.js",
+  "types": "dist/protocol-ml.d.ts",
+  "scripts": {
+    "dev": "parcel index.html --watch-dir src/",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "typescript": "^5.4.0"
+  }
+}

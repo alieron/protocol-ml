@@ -1,0 +1,105 @@
+<svg class="protocol-diagram" xmlns="http://www.w3.org/2000/svg" width="460" height="480">
+<rect width="100%" height="100%" fill="#333333"></rect>
+
+<text x="110" y="45" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" fill="white" font-size="20">
+  Alice
+</text>
+<line stroke="#aaaaaa" x1="110" y1="60" x2="110" y2="460"></line>
+
+<text x="350" y="45" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" fill="white" font-size="20">
+  Bob
+</text>
+<line stroke="#aaaaaa" x1="350" y1="60" x2="350" y2="460"></line>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <line x1="110" y1="100" x2="350" y2="140"></line>
+  <line x1="350" y1="140" x2="339.3140658251518" y2="143.28797974610714"></line>
+  <line x1="350" y1="140" x2="340.9580556982053" y2="133.4240405077857"></line>
+</g>
+<text x="231.64398987305358" y="110.13606076167856" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(9.462322208025617 231.64398987305358 110.13606076167856)" fill="white" font-size="15">
+  normal
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <line x1="350" y1="140" x2="110" y2="180"></line>
+  <line x1="110" y1="180" x2="119.04194430179464" y2="173.4240405077857"></line>
+  <line x1="110" y1="180" x2="120.68593417484823" y2="183.28797974610714"></line>
+</g>
+<text x="228.35601012694642" y="150.13606076167855" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(350.5376777919744 228.35601012694642 150.13606076167855)" fill="white" font-size="15">
+  normal reply
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="110" y1="180" x2="314" y2="214"></line>
+  <path stroke="orange" d="M 314 214 L 317.6780050634732 204.47506329341516 L 318.4580556982054 224.88094683353128 L 325.81406582515183 205.8310734203616 L 326.594116459884 226.23695696047773 L 332.3061367137769 217.0510227856295 L 340.13606076167855 218.35601012694642"></path>
+  <line stroke="orange" x1="340.13606076167855" y1="218.35601012694642" x2="350" y2="220"></line>
+  <line stroke="orange" x1="350" y1="220" x2="339.3140658251518" y2="223.28797974610714"></line>
+  <line stroke="orange" x1="350" y1="220" x2="340.9580556982053" y2="213.4240405077857"></line>
+</g>
+<text x="231.64398987305358" y="190.13606076167855" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(9.462322208025617 231.64398987305358 190.13606076167855)" fill="white" font-size="15">
+  corrupted
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="350" y1="220" x2="146" y2="254"></line>
+  <path stroke="orange" d="M 146 254 L 145.60997468263395 264.20294177005803 L 138.2539645556875 245.15306835688838 L 137.4739139209554 265.5589518970045 L 130.11790379400895 246.5090784838348 L 127.69386328622326 257.0510227856294 L 119.86393923832144 258.35601012694644"></path>
+  <line stroke="orange" x1="119.86393923832144" y1="258.35601012694644" x2="110" y2="260"></line>
+  <line stroke="orange" x1="110" y1="260" x2="119.04194430179464" y2="253.42404050778572"></line>
+  <line stroke="orange" x1="110" y1="260" x2="120.68593417484823" y2="263.28797974610717"></line>
+</g>
+<text x="228.35601012694642" y="230.13606076167855" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(350.5376777919744 228.35601012694642 230.13606076167855)" fill="white" font-size="15">
+  corrupted reply
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <line x1="110" y1="260" x2="314" y2="294"></line>
+  <line stroke="red" x1="308" y1="288" x2="320" y2="300"></line>
+  <line stroke="red" x1="308" y1="300" x2="320" y2="288"></line>
+</g>
+<text x="231.64398987305358" y="270.13606076167855" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(9.462322208025617 231.64398987305358 270.13606076167855)" fill="white" font-size="15">
+  dropped
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <line x1="350" y1="300" x2="146" y2="334"></line>
+  <line stroke="red" x1="140" y1="328" x2="152" y2="340"></line>
+  <line stroke="red" x1="140" y1="340" x2="152" y2="328"></line>
+</g>
+<text x="228.35601012694642" y="310.13606076167855" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(350.5376777919744 228.35601012694642 310.13606076167855)" fill="white" font-size="15">
+  dropped reply
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <polygon stroke="none" fill="#ffffff44" points="110,340 350,380 350,410 110,370"></polygon>
+  <line x1="110" y1="340" x2="350" y2="380"></line>
+  <line x1="350" y1="380" x2="339.3140658251518" y2="383.28797974610717"></line>
+  <line x1="350" y1="380" x2="340.9580556982053" y2="373.4240405077857"></line>
+  <line x1="110" y1="370" x2="350" y2="410"></line>
+  <line x1="350" y1="410" x2="339.3140658251518" y2="413.28797974610717"></line>
+  <line x1="350" y1="410" x2="340.9580556982053" y2="403.4240405077857"></line>
+</g>
+<text x="231.64398987305358" y="374.7959088574822" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(9.462322208025617 231.64398987305358 374.7959088574822)" fill="white" font-size="15">
+  thick
+</text>
+
+<g stroke="white" stroke-width="2" fill="none" stroke-linecap="round">
+  <polygon stroke="none" fill="#ffffff44" points="350,380 110,420 110,450 350,410"></polygon>
+  <line x1="350" y1="380" x2="110" y2="420"></line>
+  <line x1="110" y1="420" x2="119.04194430179464" y2="413.4240405077857"></line>
+  <line x1="110" y1="420" x2="120.68593417484823" y2="423.28797974610717"></line>
+  <line x1="350" y1="410" x2="110" y2="450"></line>
+  <line x1="110" y1="450" x2="119.04194430179464" y2="443.4240405077857"></line>
+  <line x1="110" y1="450" x2="120.68593417484823" y2="453.28797974610717"></line>
+</g>
+<text x="228.35601012694642" y="414.7959088574822" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" transform="rotate(350.5376777919744 228.35601012694642 414.7959088574822)" fill="white" font-size="15">
+  thick reply
+</text>
+
+<text x="70" y="180" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" fill="white" font-size="15">
+  left label @2
+</text>
+
+<text x="390" y="300" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace" fill="white" font-size="15">
+  right label @5
+</text>
+</svg>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>protocol-ml</title>
+  <style>
+    body { margin: 0; background: #333333; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    pre.protocol-ml { display: none; }
+    <!-- svg.protocol-diagram > path { stroke: "#eee"; fill: "#eee";} -->
+  </style>
+</head>
+<body>
+
+<pre class="protocol-ml">
+def messageSpacing 20px
+def participantSpacing 160px
+
+participant Alice a
+participant Bob b
+
+a -> b : "normal"
+b -> a : "normal reply"
+
+a ~> b : "corrupted"
+b ~> a : "corrupted reply"
+
+a -x b : "dropped"
+b -x a : "dropped reply"
+
+a => b : "thick"
+b => a : "thick reply"
+
+a @2 < "left label @2"
+b @5 > "right label @5"
+</pre>
+
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>
