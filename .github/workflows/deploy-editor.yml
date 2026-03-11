@@ -3,7 +3,8 @@ name: Deploy Interactive Editor to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - master
+      - dev
 
 jobs:
   deploy:
@@ -23,10 +24,19 @@ jobs:
       - name: Build interactive editor
         run: npm run build:docs
 
-      - name: Deploy docs folder to GitHub Pages
+      - name: Prepare subfolder for dev branch
+        if: github.ref == 'refs/heads/dev'
+        # Move built files to a subfolder to avoid overwriting the main docs for the master branch
+        run: |
+          mkdir temp_dist
+          mv docs/* temp_dist/ 2>/dev/null || true
+          mkdir -p docs/dev
+          mv temp_dist/* docs/dev/
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
           publish_branch: gh-pages
-          force_orphan: true
+          keep_files: true
