@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    height: 100vh;
+    overflow: hidden;
+}
+
+header {
+    background: #252526;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #3e3e42;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    color: #858585;
+    margin-top: 0.25rem;
+}
+
+main {
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+.panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #3e3e42;
+}
+
+.panel:last-child {
+    border-right: none;
+}
+
+.panel-header {
+    background: #2d2d2d;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #3e3e42;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #cccccc;
+}
+
+.copy-btn {
+    background: #0e639c;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.copy-btn:hover {
+    background: #1177bb;
+}
+
+.copy-btn:active {
+    background: #0d5a8f;
+}
+
+.copy-btn.copied {
+    background: #16825d;
+}
+
+.panel-content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+}
+
+#preview {
+    padding: 2rem;
+    background: #2d2d2d;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error {
+    color: #f48771;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.protocol-ml-wrapper {
+    display: inline-block;
+}
+
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .panel {
+        border-right: none;
+        border-bottom: 1px solid #3e3e42;
+    }
+}
+
+/* CodeMirror overrides */
+.CodeMirror {
+    height: 100%;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.CodeMirror-gutters {
+    background: #252526;
+    border-right: 1px solid #3e3e42;
+}
+
+.CodeMirror-linenumber {
+    color: #858585;
+}
+
+.CodeMirror-cursor {
+    border-left: 2px solid #d4d4d4;
+}
+
+.CodeMirror-selected {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* protocol-ml syntax highlighting */
+.cm-pml-keyword {
+    color: #569cd6;
+    font-weight: bold;
+}
+
+/* def, participant */
+.cm-pml-setting {
+    color: #9cdcfe;
+}
+
+/* setting name */
+.cm-pml-value {
+    color: #b5cea8;
+}
+
+/* identifiers */
+.cm-pml-arrow-normal {
+    color: #4fc1ff;
+    font-weight: bold;
+}
+
+/* -> */
+.cm-pml-arrow-thick {
+    color: #dcdcaa;
+    font-weight: bold;
+}
+
+/* => */
+.cm-pml-arrow-corrupt {
+    color: #f44747;
+    font-weight: bold;
+}
+
+/* ~> */
+.cm-pml-arrow-dropped {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+/* -x */
+.cm-pml-label {
+    color: #ce9178;
+}
+
+/* "quoted label" */
+.cm-pml-at {
+    color: #c586c0;
+}
+
+/* @number */
+.cm-pml-side {
+    color: #c586c0;
+    font-weight: bold;
+}
+
+/* < > */
+.cm-pml-comment {
+    color: #6a9955;
+    font-style: italic;
+}
