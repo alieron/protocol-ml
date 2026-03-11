@@ -24,19 +24,21 @@ jobs:
       - name: Build interactive editor
         run: npm run build:docs
 
-      - name: Prepare subfolder for dev branch
-        if: github.ref == 'refs/heads/dev'
-        # Move built files to a subfolder to avoid overwriting the main docs for the master branch
-        run: |
-          mkdir temp_dist
-          mv docs/* temp_dist/ 2>/dev/null || true
-          mkdir -p docs/dev
-          mv temp_dist/* docs/dev/
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (master)
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs
+          publish_dir: dist
+          publish_branch: gh-pages
+          keep_files: true
+
+      - name: Deploy to GitHub Pages (dev)
+        if: github.ref == 'refs/heads/dev'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          destination_dir: dev
           publish_branch: gh-pages
           keep_files: true
