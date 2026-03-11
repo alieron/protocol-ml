@@ -5,8 +5,10 @@
   "module": "dist/protocol-ml.esm.m.js",
   "types": "dist/protocol-ml.d.ts",
   "scripts": {
-    "dev": "parcel index.html --watch-dir src/",
-    "build": "tsc"
+    "dev": "parcel index.html",
+    "dev:docs": "parcel docs/index.html",
+    "build": "tsc",
+    "build:docs": "parcel build docs/index.html --dist-dir docs/dist --public-url ./"
   },
   "devDependencies": {
     "parcel": "^2.12.0",
