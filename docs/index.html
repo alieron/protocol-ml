@@ -5,7 +5,96 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>protocol-ml - Interactive Editor</title>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.13/lib/codemirror.css">
     <style>
+        .CodeMirror {
+            height: 100%;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .CodeMirror-gutters {
+            background: #252526;
+            border-right: 1px solid #3e3e42;
+        }
+
+        .CodeMirror-linenumber {
+            color: #858585;
+        }
+
+        .CodeMirror-cursor {
+            border-left: 2px solid #d4d4d4;
+        }
+
+        .CodeMirror-selected {
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* protocol-ml syntax highlighting */
+        .cm-pml-keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        /* def, participant */
+        .cm-pml-setting {
+            color: #9cdcfe;
+        }
+
+        /* setting name */
+        .cm-pml-value {
+            color: #b5cea8;
+        }
+
+        /* value / number */
+        .cm-pml-arrow-normal {
+            color: #4fc1ff;
+            font-weight: bold;
+        }
+
+        /* -> */
+        .cm-pml-arrow-thick {
+            color: #dcdcaa;
+            font-weight: bold;
+        }
+
+        /* => */
+        .cm-pml-arrow-corrupt {
+            color: #f44747;
+            font-weight: bold;
+        }
+
+        /* ~> */
+        .cm-pml-arrow-dropped {
+            color: #ff8c00;
+            font-weight: bold;
+        }
+
+        /* -x */
+        .cm-pml-label {
+            color: #ce9178;
+        }
+
+        /* "quoted label" */
+        .cm-pml-at {
+            color: #c586c0;
+        }
+
+        /* @number */
+        .cm-pml-side {
+            color: #c586c0;
+            font-weight: bold;
+        }
+
+        /* < > */
+        .cm-pml-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -98,20 +187,6 @@
             position: relative;
         }
 
-        #editor {
-            width: 100%;
-            height: 100%;
-            background: #1e1e1e;
-            color: #d4d4d4;
-            border: none;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            resize: none;
-            outline: none;
-        }
-
         #preview {
             padding: 2rem;
             background: #2d2d2d;
@@ -164,28 +239,7 @@
                 <button class="copy-btn" id="copyCode">Copy Code</button>
             </div>
             <div class="panel-content">
-                <textarea id="editor" spellcheck="false">
-def messageSpacing 20px
-def participantSpacing 160px
-
-participant Alice a
-participant Bob b
-
-a -> b : "normal"
-b -> a : "normal reply"
-
-a ~> b : "corrupted"
-b ~> a : "corrupted reply"
-
-a -x b : "dropped"
-b -x a : "dropped reply"
-
-a => b : "thick"
-b => a : "thick reply"
-
-a @2 < "left label @2"
-b @5 > "right label @5"'
-</textarea>
+                <div id="editor"></div>
             </div>
         </div>
 
@@ -203,20 +257,97 @@ b @5 > "right label @5"'
         </div>
     </main>
 
+    <script src="https://unpkg.com/codemirror@5.65.13/lib/codemirror.js"></script>
+    <script>
+        // Custom CodeMirror mode for protocol-ml
+        CodeMirror.defineMode('protocol-ml', function () {
+            return {
+                startState: function () { return { inString: false }; },
+                token: function (stream, state) {
+                    // Strings
+                    if (state.inString) {
+                        if (stream.skipTo('"')) {
+                            stream.next();
+                            state.inString = false;
+                        } else {
+                            stream.skipToEnd();
+                        }
+                        return 'pml-label';
+                    }
+
+                    // Open quote => start string
+                    if (stream.peek() === '"') {
+                        stream.next();
+                        state.inString = true;
+                        return 'pml-label';
+                    }
+
+
+                    // Skip whitespace
+                    if (stream.eatSpace()) return null;
+
+                    // Comments
+                    if (stream.match('//')) {
+                        stream.skipToEnd();
+                        return 'pml-comment';
+                    }
+
+                    // @number position
+                    if (stream.match(/@(\d+(\.\d+)?)/)) return 'pml-at';
+
+                    // Arrow types: -> => ~> -x
+                    if (stream.match('->')) return 'pml-arrow-normal';
+                    if (stream.match('=>')) return 'pml-arrow-thick';
+                    if (stream.match('~>')) return 'pml-arrow-corrupt';
+                    if (stream.match('-x')) return 'pml-arrow-dropped';
+
+                    // < or > (side annotation)
+                    if (stream.match(/[<>]/)) return 'pml-side';
+
+                    // Keywords: def, participant
+                    if (stream.match(/\b(def|participant)\b/)) {
+                        // Peek at what follows to highlight arguments
+                        return 'pml-keyword';
+                    }
+
+                    // Numbers (e.g. values after def)
+                    if (stream.match(/\d+(\.\d+)?(px|em|rem|%)?/)) return 'pml-value';
+
+                    // Identifiers: colour based on position in line
+                    if (stream.match(/\w+/)) {
+                        // Use sol() to detect first token on line
+                        return 'pml-alias';
+                    }
+
+                    stream.next();
+                    return null;
+                }
+            };
+        });
+    </script>
     <script type="module">
         import { parse } from '../src/parser.ts';
         import { renderSVG } from '../src/renderer.ts';
 
-        const editor = document.getElementById('editor');
         const preview = document.getElementById('preview');
         const copyCodeBtn = document.getElementById('copyCode');
         const copyPNGBtn = document.getElementById('copyPNG');
         const copySVGBtn = document.getElementById('copySVG');
 
+        const editor = window.CodeMirror(document.getElementById('editor'), {
+            value: `def messageSpacing 20px\ndef participantSpacing 160px\n\nparticipant Alice a\nparticipant Bob b\n\na -> b : "normal"\nb -> a : "normal reply"\n\na ~> b : "corrupted"\nb ~> a : "corrupted reply"\n\na -x b : "dropped"\nb -x a : "dropped reply"\n\na => b : "thick"\nb => a : "thick reply"\n\na @2 < "left label @2"\nb @5 > "right label @5"`,
+            mode: 'protocol-ml',
+            lineNumbers: true,
+            autofocus: true,
+            tabSize: 2,
+            indentUnit: 2,
+            viewportMargin: Infinity
+        });
+
         let currentSVG = '';
 
         function render() {
-            const code = editor.value;
+            const code = editor.getValue();
             try {
                 const diagram = parse(code);
                 currentSVG = renderSVG(diagram);
@@ -229,14 +360,14 @@ b @5 > "right label @5"'
 
         // Debounce rendering for performance
         let renderTimeout;
-        editor.addEventListener('input', () => {
+        editor.on('change', () => {
             clearTimeout(renderTimeout);
             renderTimeout = setTimeout(render, 300);
         });
 
         copyCodeBtn.addEventListener('click', async () => {
             try {
-                await navigator.clipboard.writeText(editor.value);
+                await navigator.clipboard.writeText(editor.getValue());
                 copyCodeBtn.textContent = 'Copied!';
                 copyCodeBtn.classList.add('copied');
                 setTimeout(() => {
