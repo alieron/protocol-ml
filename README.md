@@ -3,7 +3,7 @@ Markup language for rendering network protocol diagrams.
 
 ## Interactive Demo
 
-Try the live editor: [Demo](https://yeeshin504.github.io/protocol-ml/index.html) (after building with `npm run build:docs`)
+Try the live editor [here](https://alieron.github.io/protocol-ml/)
 
 ### Development
 
