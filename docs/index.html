@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>protocol-ml - Interactive Editor</title>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.13/lib/codemirror.css">
+    <link rel="stylesheet" href="./editor.css">
+</head>
+
+<body>
+    <header>
+        <h1>protocol-ml</h1>
+        <p class="subtitle">Interactive Protocol Diagram Editor</p>
+    </header>
+
+    <main>
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-title">Code Editor</span>
+                <button class="copy-btn" id="copyCode">Copy Code</button>
+            </div>
+            <div class="panel-content">
+                <div id="editor"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-title">SVG Preview</span>
+                <div>
+                    <button class="copy-btn" id="copyPNG">Copy PNG</button>
+                    <button class="copy-btn" id="copySVG" style="margin-left: 0.5rem;">Copy SVG</button>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div id="preview"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/codemirror@5.65.13/lib/codemirror.js"></script>
+    <script src="./syntax-highlight.js"></script>
+    <script type="module" src="./editor.js"></script>
+</body>
+
+</html>
