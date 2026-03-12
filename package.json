@@ -8,7 +8,7 @@
     "dev": "parcel index.html",
     "dev:docs": "parcel docs/index.html",
     "build": "tsc",
-    "build:docs": "parcel build docs/index.html --dist-dir dist --public-url ./"
+    "build:docs": "parcel build docs/index.html --dist-dir dist --public-url /protocol-ml/"
   },
   "targets": {
     "module": false,
