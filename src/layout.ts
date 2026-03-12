@@ -74,6 +74,8 @@ export function resolveLayout(entities: Entities): Diagram {
 
         if (action.start) {
           counter = action.start;
+          startY = counter;
+          endY = counter + 1;
         }
 
         if (action.end) {
